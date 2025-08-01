@@ -18,14 +18,12 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class UserController {
 
+    private final UserService userService;
 
-  private final  UserService userService;
-
-    @PostMapping("/register")
-    public Mono<ResponseEntity<UserResponseDto>> register(@Valid @RequestBody UserRegisterRequestDto RequestDto) {
-        return userService.register(RequestDto)
-                .map(userResponce -> ResponseEntity.status(HttpStatus.CREATED).body(userResponce));
+        @PostMapping("/register")
+    public Mono<ResponseEntity<UserResponseDto>> register(@Valid @RequestBody UserRegisterRequestDto requestDto) {
+        return userService.register(requestDto)
+                .map(userResponse -> ResponseEntity.status(HttpStatus.CREATED).body(userResponse));
     }
-
 
 }

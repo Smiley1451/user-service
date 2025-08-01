@@ -1,33 +1,30 @@
 package com.eduhub.user_service.mapper;
 
 import com.eduhub.user_service.model.dto.*;
-
 import com.eduhub.user_service.model.entity.User;
+import com.eduhub.user_service.model.enums.Role;
 import com.eduhub.user_service.model.enums.UserStatus;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
+
 @Component
 public class UserMapper {
 
-
-    public static User toEntity(UserRegisterRequestDto dto) {
+    public User toEntity(UserRegisterRequestDto dto) {
         return User.builder()
-                .id(UUID.randomUUID())
                 .fullName(dto.getFullName())
                 .username(dto.getUsername())
                 .email(dto.getEmail())
                 .phone(dto.getPhone())
                 .dob(dto.getDob())
-                .role(dto.getRole())
+                .role(dto.getRole() != null ? dto.getRole() : Role.STUDENT)
                 .status(UserStatus.ACTIVE)
-                .emailVerified(dto.isEmailVerified()) // <--- from DTO
+                .emailVerified(dto.isEmailVerified())
                 .createdAt(LocalDateTime.now())
                 .build();
     }
-
-
 
     public UserResponseDto toResponse(User user) {
         return UserResponseDto.builder()
@@ -46,8 +43,7 @@ public class UserMapper {
                 .build();
     }
 
-
-    public static void updateEntityFromDto(UserUpdateRequestDto dto, User user) {
+    public void updateEntityFromDto(UserUpdateRequestDto dto, User user) {
         user.setFullName(dto.getFullName());
         user.setPhone(dto.getPhone());
         user.setDob(dto.getDob());
