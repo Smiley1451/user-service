@@ -27,7 +27,7 @@ public class UserRegisterRequestDto {
     @Pattern(regexp = "^[6-9]\\d{9}$", message = "Phone must start with 6-9 and be 10 digits")
     private String phone;
 
-    private LocalDate dob;
+   private LocalDate dob;
     private boolean emailVerified;
 
 
