@@ -55,7 +55,7 @@ public class KafkaConfig {
         
         DefaultErrorHandler errorHandler = new DefaultErrorHandler(
                 new DeadLetterPublishingRecoverer(kafkaTemplate),
-                new FixedBackOff(1000L, 3L) // 3 retries with 1 second interval
+                new FixedBackOff(1000L, 3L) 
         );
         factory.setCommonErrorHandler(errorHandler);
 
