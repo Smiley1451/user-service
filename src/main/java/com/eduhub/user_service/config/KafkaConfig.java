@@ -1,6 +1,6 @@
 package com.eduhub.user_service.config;
 
-//import com.eduhub.user_service.config.UserCreatedEvent;
+
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -52,7 +52,7 @@ public class KafkaConfig {
         factory.setConsumerFactory(userCreatedEventConsumerFactory());
         factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);
 
-        // Configure error handler with dead letter topic
+        
         DefaultErrorHandler errorHandler = new DefaultErrorHandler(
                 new DeadLetterPublishingRecoverer(kafkaTemplate),
                 new FixedBackOff(1000L, 3L) // 3 retries with 1 second interval
